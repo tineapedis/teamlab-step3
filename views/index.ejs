@@ -6,13 +6,77 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <div class="container-fluid">
+      <div class="row">
+        <img src="images/iphone.png" class="offset-md-3">
+        <div class="row col-md-3">
+          <div class="login col-md-12 text-center">
+            <h1 id="title">Murata</h1>
+            <form>
+               <div class="form-group">
+                   <input type="text" name="email" class="form-control" placeholder="username">
+               </div>
+               <div class="form-group">
+                   <input type="text" name="password" class="form-control" placeholder="Password">
+               </div>
+               <button type="submit" class="btn btn-primary button">Log in</button>
+               <p id="or">OR</p>
+               <p class="login-p">Log in with Facebook</p>
+               <p class="login-p">Forgot password?</p>
+            </form>
+          </div>
 
+          <div class="signup col-md-12 text-center">
+            <h1 id="title">Murata</h1>
+            <form>
+               <div class="form-group">
+                   <input type="text" name="email" class="form-control" placeholder="username">
+               </div>
+               <div class="form-group">
+                   <input type="text" name="password" class="form-control" placeholder="Password">
+               </div>
+               <div class="form-group">
+                   <input type="text" name="password" class="form-control" placeholder="Password Confirmation">
+               </div>
+               <button type="submit" class="btn btn-primary button">Sign up</button>
+            </form>
+            <p id="signing">By signing up, you agree to our </p>
+            <P id="privacy">Terms & Privacy Policy.</P>
+          </div>
+
+          <div class="change col-md-12 text-center">
+            <p id="q-account">Don't have an account?</p>
+            <a id="change-form" href="#" onClick="test();">Sign up</a>
+          </div>
+          <div class="col-md-12 text-center">
+            <p>Get the app.</p>
+          </div>
+          <div class="row col-md-12">
+            <div class="test col-md-6 text-center">
+              <img src="images/appstore.png">
+            </div>
+            <div class="test col-md-6 text-center">
+              <img src="images/googleplay.png">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <p id="strings" class="text-muted col-md-7 offset-md-1">ABOUT US &nbsp;&nbsp; SUPPORT &nbsp;&nbsp; BLOG &nbsp;&nbsp;   PRESS &nbsp;&nbsp; API &nbsp;&nbsp; JOBS &nbsp;&nbsp; PRIVACY &nbsp;&nbsp; TERMS &nbsp;&nbsp; DIRECTORY &nbsp;&nbsp; LANGUAGE</p>
+          <p class="text-muted col-md-3 offset-md-1">© 2018 MURATA</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap読み込み -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/popper.js/dist/umd/popper.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- jsファイル読み込み -->
     <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
-    <script src='javascripts/test.js'></script>
+    <script src='javascripts/index.js'></script>
   </body>
 </html>
