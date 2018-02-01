@@ -88,3 +88,53 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+// websocketプロトコルをlisten
+var io = require('socket.io').listen(server);
+
+var otherro = io.sockets.on('connection', function(socket) {
+  //接続のidを確認
+  console.log('connected', socket.id);
+
+  // ログインした時
+  socket.on('login', function(user) {
+    user.socketId = socket.id;
+    socket.broadcast.emit('login', user);
+  });
+
+  // バトルの申し込み
+  socket.on('apply', function(opponent) {
+    opponent.ownId=socket.id;
+    io.to(opponent.id).emit('getApply', opponent)
+  });
+
+  // バトル画面に遷移する時
+  socket.on('acceptBattle', function(opponent) {
+    io.to(opponent.id).emit('battle', opponent)
+  });
+
+  // 接続が切断したとき
+  socket.on('disconnect', function() {
+    socket.broadcast.emit('disconne', socket.id);
+  });
+
+  /*
+    バトル関連
+  */
+  socket.on('moveBattleS', function(user) {
+    io.emit('roomConnect', user);
+  });
+
+  // ルーム別に管理
+  socket.on("roomInit",function(info){
+    //join(room)で部屋を作る
+    socket.setRoominfo=info.room;
+    socket.join(info.room); //roomIDごとに登録
+    socket.join(socket.id); //個別に識別するためにsocketidを登録
+
+    console.log("ROOM : " + info.room + " join. " + "USER ID ; " + socket.id);
+
+    otherro.to(socket.setRoominfo).emit("logmessage", socket.id);
+   });
+
+});

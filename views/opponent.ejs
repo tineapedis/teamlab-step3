@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title id="title"><%= title %></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <form action="/battle" method="post">
+      <input id="roomId" type="text" name="room" />
+    </form>
+    <div id="header">
+      <img id="othelloImg" src="images/othello.png" width="30">
+      <div id="line" style="background-color:black; width:0.5px; height:30px;"></div>
+      <p id="appTitle">Yamada Othello</p>
+      <a href="/"><img class="img" src="images/user.png" alt="TAG index" border="0"　width="25"  height="25"></a>
+      <a href="/opponent"><img class="img" src="images/battle.png" alt="TAG index" border="0"　width="25"  height="25"></a>
+      <a href="/color"><img class="img" src="images/color.png" alt="TAG index" border="0"　width="25"  height="25"></a>
+    </div>
+    <div class="container">
+        <div class="col-md-12 text-center userBox">
+          <canvas id="userImg" width="150" height="150"></canvas>
+          <canvas id="testImg" width="150" height="150"></canvas>
+
+          <h1 id="userName"><%= userName %></h1>
+          <div class="row">
+            <div class="col-md-3 offset-md-3">
+              <h1 id="userName">Win : 0</h1>
+            </div>
+            <div class="col-md-3">
+              <h1 id="userName">Lose : 0</h1>
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-md-6 offset-md-1 loginUserBox">
+            <ul id="users" class="list-inline">
+
+            </ul>
+          </div>
+
+          <div class="col-md-3 offset-md-1 applyOpponentBox">
+            <ul id="apply_users">
+
+            </ul>
+          </div>
+        </div>
+    </div>
+    <!-- Bootstrap読み込み -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/popper.js/dist/umd/popper.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- jsファイル読み込み -->
+    <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+    <script src='/socket.io/socket.io.js'></script>
+    <script src='javascripts/opponent.js'></script>
+  </body>
+</html>

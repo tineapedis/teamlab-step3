@@ -4,8 +4,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 
-var index = require('./routes/index');
+var color = require('./routes/color');
+var login = require('./routes/login');
+var routes = require('./routes/index');
+var opponent = require('./routes/opponent');
+var battle = require('./routes/battle');
 var users = require('./routes/users');
 
 var app = express();
@@ -22,17 +27,45 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 30 * 60 * 1000
+  }
+}));
 
+var sessionCheck = function(req, res, next) {
+  console.log("----------- チェック入ります -------------");
+  if (req.session.user) {
+    res.render('index');
+    next();
+  } else {
+    res.redirect('/login');
+  }
+};
 
-app.get('/test', function(req, res) {
-  console.log("TEST");
-  var Canvas = require('canvas');
-  var canvas = new Canvas(200,200);
-  console.log(canvas.width);
+app.get('/battle', battle);
+
+app.post('/editicon', routes);
+app.get('/user', routes);
+app.get('/colorlist', routes);
+
+app.get('/color', color);
+app.post('/color', color);
+
+app.get('/opponent', opponent);
+
+app.post('/signup', login);
+app.use('/login', login)
+app.get('/', sessionCheck, routes);
+app.get('/logout', function(req, res){
+  req.session.destroy();
+  res.redirect('/');
 });
 
+app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
